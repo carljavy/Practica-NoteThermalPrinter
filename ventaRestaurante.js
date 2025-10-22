@@ -9,7 +9,7 @@ function restaurante() {
     this.totalCancelado = totalCancelado;
 }
 
-nombre = "Restaurante";
+nombreRestaurante = "Restaurante";
 noCuenta = "035001";
 monto = 10654.00;
 canceladoPor = "1001";
