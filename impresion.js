@@ -50,7 +50,7 @@ function impresion(){
     printer.newLine();
 
     printer.newLine();
-    AlignRight();
+    printer.alignRight();
     printer.bold(true);
     printer.print(`${noCancelaciones} Cancelaciones  $${totalCancelado}`); 
     printer.bold(false);
