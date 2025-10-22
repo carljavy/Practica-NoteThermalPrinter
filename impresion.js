@@ -3,6 +3,7 @@ const usuario = require('./usuario.js');
 const ventaRestaurante = require('./ventaRestaurante.js');
 const ventaParaLlevar = require('./ventaParaLlevar.js');
 
+
 function impresion(){
     
     let printer = new ThermalPrinter({
@@ -35,6 +36,8 @@ function impresion(){
     //printer.print({Date.prototype.getDate.call(new Date())}/{Date.prototype.getMonth.call(new Date()) + 1}/{Date.prototype.getFullYear.call(new Date())} {Date.prototype.getHours.call(new Date())}:{Date.prototype.getMinutes.call(new Date())});
     printer.newLine();
 
+
+    //RESTAURANTE
     //--------------------------------------------------------
     printer.drawLine();
     //--------------------------------------------------------
@@ -46,7 +49,30 @@ function impresion(){
     printer.newLine();
 
     printer.table(["Cuenta", "Monto($)", "Ca.Por", "Ca.A", "", "Hora"]);
-    printer.table([`${noCuenta}`, `${monto}`, `${canceladoPor}`, `${canceladoA}`, `${nombreUsuario}`, `${hora}`]);
+    printer.table([`${noCuentaRes}`, `${montoRes}`, `${codigoUsuario}`, `${codigoUsuario}`, `${nombreUsuario} `, `${hora}`]);
+    printer.newLine();
+
+    printer.newLine();
+    printer.alignRight();
+    printer.bold(true);
+    printer.print(`${noCancelacionesRes} Cancelaciones  $${totalCanceladoRes}`); 
+    printer.bold(false);
+
+
+    //PARA LLEVAR
+    //--------------------------------------------------------
+    printer.drawLine();
+    //--------------------------------------------------------  
+
+    printer.alignLeft();
+    printer.newLine();
+    printer.bold(true);
+    printer.print(`Tipo de venta ${nombreParaLlevar}`);
+    printer.bold(false);
+    printer.newLine();
+
+    printer.table(["Cuenta", "Monto($) ", "Ca.Por", "Ca.A", "  ", " Hora"]);
+    printer.table([`${noCuentallevar}`, `${montollevar}`, `${codigoUsuario}`, `${codigoUsuario}`, `${nombreUsuario} `, `${hora}`]);
     printer.newLine();
 
     printer.newLine();
@@ -54,11 +80,6 @@ function impresion(){
     printer.bold(true);
     printer.print(`${noCancelaciones} Cancelaciones  $${totalCancelado}`); 
     printer.bold(false);
-    printer.newLine();
-
-    //--------------------------------------------------------
-    printer.drawLine();
-    //--------------------------------------------------------  
 
 
 

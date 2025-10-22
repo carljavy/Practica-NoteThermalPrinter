@@ -4,6 +4,6 @@ function usuario() {
 }
 
 nombreUsuario = "Alejandro A";
-codigo = "1001";
+codigoUsuario = "1001";
 
 module.exports = usuario;
