@@ -6,7 +6,7 @@ const impresion = require('./impresion.js');
 
 // Ruta básica
 app.get('/', (req, res) => {
-  res.send('¡Hola, mundo! El servidor Express está funcionando.');
+  res.send('El servidor Express está funcionando');
 });
 
 app.get('/info', servicio);
