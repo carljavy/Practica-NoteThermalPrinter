@@ -1,6 +1,6 @@
 function usuario() {
     this.nombreUsuario = nombreUsuario;
-    this.codigo = codigo;  
+    this.codigo = codigoUsuario;  
 }
 
 nombreUsuario = "Alejandro A";

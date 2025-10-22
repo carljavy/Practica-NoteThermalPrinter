@@ -1,3 +1,5 @@
+/*
+
 function paraLlevar() {
     this.nombreParaLlevar = nombreParaLlevar;
     this.noCuentallevar = noCuentallevar;
@@ -14,5 +16,5 @@ hora = "14:45";
 noCancelacionesLlevar = 1;
 totalCanceladoLlevar = 2500.00;
 
-
+*/
 module.exports = paraLlevar;
