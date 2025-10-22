@@ -1,4 +1,4 @@
-function usuario(nombre, edad) {
+function usuario() {
     this.nombre = nombre;
     this.codigo = codigo;  
 }

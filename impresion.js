@@ -1,5 +1,7 @@
 const { ThermalPrinter, PrinterTypes, CharacterSet, BreakLine } = require("node-thermal-printer");
 const usuario = require('./usuario.js');
+const ventaRestaurante = require('./ventaRestaurante.js');
+const ventaParaLlevar = require('./ventaParaLlevar.js');
 
 function impresion(){
     
@@ -22,20 +24,42 @@ function impresion(){
     printer.print("CUENTAS CANCELADAS");
     printer.bold(false);
     printer.newLine();
+    printer.newLine();
 
-    printer.alignRight();
+
+
+    printer.alignLeft();
     printer.print(`Usuario: ${codigo} ${nombre}`);
     printer.newLine();
     printer.print("15/08/2024 17:26");
     //printer.print({Date.prototype.getDate.call(new Date())}/{Date.prototype.getMonth.call(new Date()) + 1}/{Date.prototype.getFullYear.call(new Date())} {Date.prototype.getHours.call(new Date())}:{Date.prototype.getMinutes.call(new Date())});
     printer.newLine();
 
+    //--------------------------------------------------------
     printer.drawLine();
     //--------------------------------------------------------
 
     printer.newLine();
     printer.bold(true);
-    printer.print(`Tipo de venta Restaurante`/*${Restaurante}*/);
+    printer.print(`Tipo de venta ${nombreRestaurante}`);
+    printer.bold(false);
+    printer.newLine();
+
+    printer.table(["Cuenta", "Monto($)", "Ca.Por", "Ca.A", "", "Hora"]);
+    printer.table([`${noCuenta}`, `${monto}`, `${canceladoPor}`, `${canceladoA}`, `${usuario}`, `${hora}`]);
+    printer.newLine();
+
+    printer.newLine();
+    AlignRight();
+    printer.bold(true);
+    printer.print(`${noCancelaciones} Cancelaciones  $${totalCancelado}`); 
+    printer.bold(false);
+    printer.newLine();
+
+    //--------------------------------------------------------
+    printer.drawLine();
+    //--------------------------------------------------------  
+
 
 
     printer.cut();
