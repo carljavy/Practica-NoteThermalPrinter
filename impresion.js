@@ -35,7 +35,7 @@ function impresion(){
 
     printer.newLine();
     printer.bold(true);
-    printer.print(`Tipo de venta ${Restaurante}`);
+    printer.print(`Tipo de venta Restaurante`/*${Restaurante}*/);
 
 
     printer.cut();
