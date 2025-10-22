@@ -64,6 +64,7 @@ function impresion(){
     printer.drawLine();
     //--------------------------------------------------------  
 
+    /*
     printer.alignLeft();
     printer.newLine();
     printer.bold(true);
@@ -78,9 +79,9 @@ function impresion(){
     printer.newLine();
     printer.alignRight();
     printer.bold(true);
-    printer.print(`${noCancelacionesRes} Cancelaciones  $${totalCanceladoRes}`); 
+    printer.print(`${noCancelacionesRes} Cancelaciones  $${totalCancelado}`); 
     printer.bold(false);
-
+    */
 
 
     printer.cut();
