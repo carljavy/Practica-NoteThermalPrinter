@@ -46,7 +46,7 @@ function impresion(){
     printer.newLine();
 
     printer.table(["Cuenta", "Monto($)", "Ca.Por", "Ca.A", "", "Hora"]);
-    printer.table([`${noCuenta}`, `${monto}`, `${canceladoPor}`, `${canceladoA}`, `${usuario}`, `${hora}`]);
+    printer.table([`${noCuenta}`, `${monto}`, `${canceladoPor}`, `${canceladoA}`, `${nombreUsuario}`, `${hora}`]);
     printer.newLine();
 
     printer.newLine();

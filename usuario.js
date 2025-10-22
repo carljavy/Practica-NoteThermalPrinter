@@ -1,9 +1,9 @@
 function usuario() {
-    this.nombre = nombre;
+    this.nombreUsuario = nombreUsuario;
     this.codigo = codigo;  
 }
 
-nombre = "Alejandro A";
+nombreUsuario = "Alejandro A";
 codigo = "1001";
 
 module.exports = usuario;
