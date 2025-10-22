@@ -67,18 +67,18 @@ function impresion(){
     printer.alignLeft();
     printer.newLine();
     printer.bold(true);
-    printer.print(`Tipo de venta ${nombreParaLlevar}`);
+    printer.print(`Tipo de venta ${nombreRestaurante}`);
     printer.bold(false);
     printer.newLine();
 
     printer.table(["Cuenta", "Monto($) ", "Ca.Por", "Ca.A", "  ", " Hora"]);
-    printer.table([`${noCuentallevar}`, `${montollevar}`, `${codigoUsuario}`, `${codigoUsuario}`, `${nombreUsuario} `, `${hora}`]);
+    printer.table([`${noCuentaRes}`, `${montoRes}`, `${codigoUsuario}`, `${codigoUsuario}`, `${nombreUsuario} `, `${hora}`]);
     printer.newLine();
 
     printer.newLine();
     printer.alignRight();
     printer.bold(true);
-    printer.print(`${noCancelaciones} Cancelaciones  $${totalCancelado}`); 
+    printer.print(`${noCancelacionesRes} Cancelaciones  $${totalCanceladoRes}`); 
     printer.bold(false);
 
 
@@ -91,4 +91,4 @@ function impresion(){
     return printer
 }
 
-module.exports = impresion
+module.exports = impresion;
