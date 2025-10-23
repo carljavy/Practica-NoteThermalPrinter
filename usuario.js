@@ -1,9 +1,11 @@
 function usuario() {
-    this.nombreUsuario = nombreUsuario;
-    this.codigo = codigoUsuario;  
+    const nombre = "carlj";
+    const codigo = "00123";
+
+    return {  nombre ,  codigo  };
 }
 
-nombreUsuario = "Alejandro A";
-codigoUsuario = "1001";
 
 module.exports = usuario;
+
+

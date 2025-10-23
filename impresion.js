@@ -4,8 +4,11 @@ const ventaRestaurante = require('./ventaRestaurante.js');
 const ventaParaLlevar = require('./ventaParaLlevar.js');
 
 
+
 function impresion(){
-    
+    // destructuring assignment to get user details
+     const { nombre, codigo } = usuario();
+     const formatName = `Usuario: ${nombre} ${codigo}`
     let printer = new ThermalPrinter({
         type: PrinterTypes.EPSON,
         interface: 'tcp://192.168.1.54',
@@ -30,7 +33,7 @@ function impresion(){
 
 
     printer.alignLeft();
-    printer.print(`Usuario: ${codigoUsuario} ${nombreUsuario}`);
+    printer.print(formatName);
     printer.newLine();
     printer.print("15/08/2024 17:26");
     //printer.print({Date.prototype.getDate.call(new Date())}/{Date.prototype.getMonth.call(new Date()) + 1}/{Date.prototype.getFullYear.call(new Date())} {Date.prototype.getHours.call(new Date())}:{Date.prototype.getMinutes.call(new Date())});
@@ -49,7 +52,7 @@ function impresion(){
     printer.newLine();
 
     printer.table(["Cuenta", "Monto($)", "Ca.Por", "Ca.A", "", "Hora"]);
-    printer.table([`${noCuentaRes}`, `${montoRes}`, `${codigoUsuario}`, `${codigoUsuario}`, `${nombreUsuario} `, `${hora}`]);
+    printer.table([`${noCuentaRes}`, `${montoRes}`, `${codigo}`, `${codigo}`, `${codigo} `, `${hora}`]);
     printer.newLine();
 
     printer.newLine();
@@ -57,31 +60,30 @@ function impresion(){
     printer.bold(true);
     printer.print(`${noCancelacionesRes} Cancelaciones  $${totalCanceladoRes}`); 
     printer.bold(false);
-
+    printer.newLine();
+    printer.newLine();
 
     //PARA LLEVAR
     //--------------------------------------------------------
     printer.drawLine();
     //--------------------------------------------------------  
 
-    /*
     printer.alignLeft();
     printer.newLine();
     printer.bold(true);
-    printer.print(`Tipo de venta ${nombreRestaurante}`);
+    printer.print(`Tipo de venta ${nombreParaLlevar}`);
     printer.bold(false);
     printer.newLine();
 
     printer.table(["Cuenta", "Monto($) ", "Ca.Por", "Ca.A", "  ", " Hora"]);
-    printer.table([`${noCuentaRes}`, `${montoRes}`, `${codigoUsuario}`, `${codigoUsuario}`, `${nombreUsuario} `, `${hora}`]);
+    printer.table([`${noCuentaRes}`, `${montoRes}`, `${codigo}`, `${codigo}`, `${nombre} `, `${hora}`]);
     printer.newLine();
 
     printer.newLine();
     printer.alignRight();
     printer.bold(true);
-    printer.print(`${noCancelacionesRes} Cancelaciones  $${totalCancelado}`); 
+    printer.print(`${noCancelacionesRes} Cancelaciones  $${totalCanceladoRes}`); 
     printer.bold(false);
-    */
 
 
     printer.cut();

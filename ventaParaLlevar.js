@@ -1,11 +1,3 @@
-function paraLlevar() {
-    this.nombreParaLlevar = nombreParaLlevar;
-    this.noCuentallevar = noCuentallevar;
-    this.montoLlevar = montoLlevar;
-    this.hora = hora;
-    this.noCancelacionesLlevar = noCancelacionesLlevar;
-    this.totalCanceladoLlevar = totalCanceladoLlevar;
-}
 
 nombreParaLlevar = "Para llevar";
 noCuentallevar = "101";
@@ -15,4 +7,11 @@ noCancelacionesLlevar = 1;
 totalCanceladoLlevar = 2500.00;
 
 
-module.exports = paraLlevar;
+module.exports = {
+    nombreParaLlevar,
+    noCuentallevar,
+    montoLlevar,
+    hora,
+    noCancelacionesLlevar,
+    totalCanceladoLlevar
+};

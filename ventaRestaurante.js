@@ -1,11 +1,3 @@
-function restaurante() {
-    this.nombreRestaurante = nombreRestaurante;
-    this.noCuentaRes = noCuentaRes;
-    this.montoRes = montoRes;
-    this.hora = hora;
-    this.noCancelacionesRes = noCancelacionesRes;
-    this.totalCanceladoRes = totalCanceladoRes;
-}
 
 nombreRestaurante = "Restaurante";
 noCuentaRes = "035001";
@@ -14,5 +6,11 @@ hora = "9:13";
 noCancelacionesRes = 1;
 totalCanceladoRes = 10654.00;
 
-
-module.exports = restaurante;
+module.exports = {
+    nombreRestaurante,
+    noCuentaRes,
+    montoRes,
+    hora,
+    noCancelacionesRes,
+    totalCanceladoRes
+};
