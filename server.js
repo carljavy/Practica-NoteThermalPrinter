@@ -1,15 +1,15 @@
+
+//CONTROLADORES
+
 const express = require('express');
 const app = express();
 const PORT = 3000;
-const servicio = require('./servicio.js');
 const impresion = require('./impresion.js');
 
 // Ruta básica
 app.get('/', (req, res) => {
   res.send('El servidor Express está funcionando');
 });
-
-app.get('/info', servicio);
 
 app.get('/impresion', impresion);
 
