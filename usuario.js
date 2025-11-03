@@ -17,6 +17,7 @@ export { Alex };
 function usuario() {
     const nombre = "Alejandro";
     const codigo = "1001";
+    const contrasena = "1111";
 
     return {  nombre ,  codigo  };
 }
