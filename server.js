@@ -5,6 +5,7 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 const impresion = require('./impresion.js');
+const consola = require('./consola.js');
 
 // Ruta básica
 app.get('/', (req, res) => {
@@ -12,6 +13,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/impresion', impresion);
+
+app.get('/consola', consola);
+
+
 
 // Iniciar el servidor
 app.listen(PORT, () => {

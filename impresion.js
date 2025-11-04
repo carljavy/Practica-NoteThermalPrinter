@@ -1,5 +1,5 @@
 const { ThermalPrinter, PrinterTypes, CharacterSet, BreakLine } = require("node-thermal-printer");
-const usuario = require('./usuario.js');
+const { usuario } = require('./usuario.js');
 const fecha = new Date();
 const fechaActual = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`.padStart(5, '0');
 const horaActual = `${fecha.getHours()}:${fecha.getMinutes()}`;
@@ -9,6 +9,9 @@ const { llevar } = require('./ventaParaLlevar.js');
 
 
 function impresion(req, res) {
+    console.log("Iniciando impresion...");
+
+
     // destructuring assignment to get user details
      const { nombre, codigo } = usuario();
      const formatName = `Usuario: ${codigo} ${nombre}`
@@ -159,7 +162,10 @@ function impresion(req, res) {
     printer.execute();
     console.log("Print executed:");
 
-    return res.send('Impresion realizada con exito');
+    
+            // if( send && res ){
+            //     return res.send('Impresion realizada');
+            // }
 }
 
 module.exports = impresion;
