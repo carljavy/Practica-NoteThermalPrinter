@@ -15,20 +15,6 @@ const users = [
 ];
 
 
-
-
-
-
-
-function usuario() {
-    const nombre = "Alejandro";
-    const codigo = "1001";
-    const contrasena = "1111";
-
-    return {  nombre , codigo, contrasena };
-}
-
-
-module.exports = { usuario, users };
+module.exports = { users };
 
 
