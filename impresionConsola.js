@@ -1,12 +1,13 @@
-const { ThermalPrinter, PrinterTypes, CharacterSet, BreakLine } = require("node-thermal-printer");
-const { cuentas } = require('./cuentas.js');
+import { ThermalPrinter, PrinterTypes, CharacterSet, BreakLine } from "node-thermal-printer";
+import { cuentas } from'./cuentas.js';
+
 const fecha = new Date();
 const fechaActual = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`.padStart(5, '0');
 const horaActual = `${fecha.getHours()}:${fecha.getMinutes()}`;
 
 
 
-function impresionConsola(usuarioActual) {
+export function impresionConsola(usuarioActual) {
     console.log("Impresion desde consola"); 
 
     //usuario que imprime
@@ -199,4 +200,4 @@ printer.newLine();
 
 }
 
-module.exports =  impresionConsola;
+

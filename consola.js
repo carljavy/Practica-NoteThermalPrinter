@@ -1,15 +1,14 @@
 //const impresion = require('./impresion.js');
-const { users } = require('./usuario.js');
-const readline = require('readline');
-const impresionConsola = require('./impresionConsola.js');
-
+import { impresionConsola } from'./impresionConsola.js';
+import { users } from'./usuario.js';
+import readline from'readline';
 
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
-function consola(req, res) {
+export function consola(req, res) {
 
     rl.question('Ingrese su codigo: ', (usuario) => {
         rl.question('Ingrese su contrasena: ', (contrasena) => {
@@ -67,4 +66,3 @@ function consola(req, res) {
     });
 }
 
-module.exports = consola;

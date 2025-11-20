@@ -1,12 +1,15 @@
 
 //CONTROLADORES
+import express from'express';
+import impresion from'./impresion.js';
+import { consola } from'./consola.js';
+import impresionURL from'./impresionURL.js';
 
-const express = require('express');
+
+
 const app = express();
 const PORT = 3000;
-const impresion = require('./impresion.js');
-const consola = require('./consola.js');
-const impresionURL = require('./impresionURL.js');
+
 
 // Ruta básica
 app.get('/', (req, res) => {

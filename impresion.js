@@ -1,14 +1,13 @@
-const { ThermalPrinter, PrinterTypes, CharacterSet, BreakLine } = require("node-thermal-printer");
-const { users } = require('./usuario.js');
+import { ThermalPrinter, PrinterTypes, CharacterSet, BreakLine } from"node-thermal-printer";
+import { users } from'./usuario.js';
+import { cuentas } from'./ventaRestaurante.js';
+import { llevar } from'./ventaParaLlevar.js';
+
 const fecha = new Date();
 const fechaActual = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`.padStart(5, '0');
 const horaActual = `${fecha.getHours()}:${fecha.getMinutes()}`;
-const { cuentas } = require('./ventaRestaurante.js');
-const { llevar } = require('./ventaParaLlevar.js');
 
-
-
-function impresion(req, res) {
+export default function impresion(req, res) {
     console.log("Iniciando impresion...");
 
 
@@ -22,6 +21,7 @@ function impresion(req, res) {
         characterSet: CharacterSet.PC852_LATIN2,
         removeSpecialCharacters: false,
         lineCharacter: "=",
+
         breakLine: BreakLine.WORD
     });
  
@@ -70,7 +70,7 @@ function impresion(req, res) {
             printer.table([`${cuenta.noCuenta}`, `${cuenta.monto}`, ` ${codigo}`, ` ${codigo}`, `${nombre.slice(0, 7)}`, ` ${cuenta.hora.padStart(5, '0')}`]);
             montoTotalRes += cuenta.monto;
 
-        }
+    }
 
     printer.newLine();
     printer.alignRight();
@@ -167,5 +167,3 @@ function impresion(req, res) {
     //    return res.send('Impresion realizada');
     //}
 }
-
-module.exports = impresion;
