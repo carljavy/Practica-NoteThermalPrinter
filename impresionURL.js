@@ -1,6 +1,7 @@
 //const { ThermalPrinter } = require("node-thermal-printer");
 import { ThermalPrinter, PrinterTypes, CharacterSet, BreakLine } from "node-thermal-printer";
 import { printerServices } from "./entidades/impresora/printerServices.js";
+import { ReportBuilder, ReportsDirector } from "./reportes/tipos/report.js"
 
 
 const fecha = new Date();
@@ -107,111 +108,122 @@ async function ejecutarImpresion(cancelaciones) {
         const isConnected = printer.isPrinterConnected();
         console.log("Printer connected:", isConnected);
 
-        // cancelaciones.forEach( cuenta => {
-        //     printer.println(`${cuenta._id}`)
-        //     printer.println(`${cuenta.accountId.userCode}`)
-        //     printer.println(`${cuenta.accountId.user}`)
-        // })
 
-        printer.alignCenter();
-        printer.print("TOMATE TAQUERIA SA DE CV");
-        printer.newLine();
-        printer.bold(true);
-        printer.print("CUENTAS CANCELADAS");
-        printer.bold(false);
-        printer.newLine();
-        printer.print(`Ventas del dia ${fechaActual}`);
-        printer.newLine();
-        printer.newLine();
+        
+        //creando un nuevo builder, que crea un reporte internamente
+        const builder =  new ReportBuilder();
+        //crear un director 
+        const directorBuilder = new ReportsDirector(builder);
 
-        printer.alignLeft();
-        printer.print(`Usuario: 1001 Alejandro A`);
-        printer.newLine();
-        printer.print(`${fechaActual} ${horaActual}`);
-        printer.newLine();
-
-        //RESTAURANTE
-        //--------------------------------------------------------
-        printer.drawLine();
-        //--------------------------------------------------------
-        printer.newLine();
-        printer.bold(true);
-        printer.print(`Tipo de venta: Restaurante`);
-        printer.bold(false);
-        printer.newLine();
-
-        tables(ONSITE_ORDER, ON_SITE_ORDER, cancelaciones, printer);
-
-        //PARA LLEVAR
-        //--------------------------------------------------------
-        printer.drawLine();
-        //--------------------------------------------------------  
-
-        printer.alignLeft();
-        printer.newLine();
-        printer.bold(true);
-        printer.print(`Tipo de venta: Para llevar`);
-        printer.bold(false);
-        printer.newLine();
-
-        tables(TOGO_ORDER, TOGO_ORDER, cancelaciones, printer);
-
-        //TELEFONICO
-        //--------------------------------------------------------
-        printer.drawLine();
-        //--------------------------------------------------------  
-
-        printer.alignLeft();
-        printer.newLine();
-        printer.bold(true);
-        printer.print(`Tipo de venta: Telefonico`);
-        printer.bold(false);
-        printer.newLine();
-
-        tables(PHONE_ORDER, PHONE_ORDER, cancelaciones, printer);
-
-        //RAPPI
-        //--------------------------------------------------------
-        printer.drawLine();
-        //--------------------------------------------------------  
-
-        printer.alignLeft();
-        printer.newLine();
-        printer.bold(true);
-        printer.print(`Tipo de venta: Rappi`);
-        printer.bold(false);
-        printer.newLine();
-
-        tables(RAPPI_ORDER, RAPPI_ORDER, cancelaciones, printer);
-
-        //TOTAL GENERAL
-        //--------------------------------------------------------
-
-        printer.alignRight
-        printer.drawLine();
-        printer.bold(true);
-        printer.print(`TOTAL  ${numeroTotalCancelaciones} Cancelaciones $${montoTotalCancelaciones}`);
-        printer.newLine();
-        printer.bold(false);
+        directorBuilder.cancelationsReport(printer, fechaActual);
 
 
-        printer.drawLine();
-        //--------------------------------------------------------
 
-        printer.alignLeft();
-        printer.print("Ca.por = Cancelado por");
-        printer.newLine();
-        printer.print("Ca.a = Cancelado a");
-        printer.newLine();
-        printer.print("Hora = Hora de cancelacion");
-        printer.newLine();
-        printer.drawLine();
 
-        //--------------------------------------------------------
+
+
+
+        //IMPRESION----------------------------------------------------------------------
+
+        // printer.alignCenter();
+        // printer.print("TOMATE TAQUERIA SA DE CV");
+        // printer.newLine();
+        // printer.bold(true);
+        // printer.print("CUENTAS CANCELADAS");
+        // printer.bold(false);
+        // printer.newLine();
+        // printer.print(`Ventas del dia ${fechaActual}`);
+        // printer.newLine();
+        // printer.newLine();
+
+        // printer.alignLeft();
+        // printer.print(`Usuario: 1001 Alejandro A`);
+        // printer.newLine();
+        // printer.print(`${fechaActual} ${horaActual}`);
+        // printer.newLine();
+
+        // //RESTAURANTE
+        // //--------------------------------------------------------
+        // printer.drawLine();
+        // //--------------------------------------------------------
+        // printer.newLine();
+        // printer.bold(true);
+        // printer.print(`Tipo de venta: Restaurante`);
+        // printer.bold(false);
+        // printer.newLine();
+
+        // tables(ONSITE_ORDER, ON_SITE_ORDER, cancelaciones, printer);
+
+        // //PARA LLEVAR
+        // //--------------------------------------------------------
+        // printer.drawLine();
+        // //--------------------------------------------------------  
+
+        // printer.alignLeft();
+        // printer.newLine();
+        // printer.bold(true);
+        // printer.print(`Tipo de venta: Para llevar`);
+        // printer.bold(false);
+        // printer.newLine();
+
+        // tables(TOGO_ORDER, TOGO_ORDER, cancelaciones, printer);
+
+        // //TELEFONICO
+        // //--------------------------------------------------------
+        // printer.drawLine();
+        // //--------------------------------------------------------  
+
+        // printer.alignLeft();
+        // printer.newLine();
+        // printer.bold(true);
+        // printer.print(`Tipo de venta: Telefonico`);
+        // printer.bold(false);
+        // printer.newLine();
+
+        // tables(PHONE_ORDER, PHONE_ORDER, cancelaciones, printer);
+
+        // //RAPPI
+        // //--------------------------------------------------------
+        // printer.drawLine();
+        // //--------------------------------------------------------  
+
+        // printer.alignLeft();
+        // printer.newLine();
+        // printer.bold(true);
+        // printer.print(`Tipo de venta: Rappi`);
+        // printer.bold(false);
+        // printer.newLine();
+
+        // tables(RAPPI_ORDER, RAPPI_ORDER, cancelaciones, printer);
+
+        // //TOTAL GENERAL
+        // //--------------------------------------------------------
+
+        // printer.alignRight
+        // printer.drawLine();
+        // printer.bold(true);
+        // printer.print(`TOTAL  ${numeroTotalCancelaciones} Cancelaciones $${montoTotalCancelaciones}`);
+        // printer.newLine();
+        // printer.bold(false);
+
+
+        // printer.drawLine();
+        // //--------------------------------------------------------
+
+        // printer.alignLeft();
+        // printer.print("Ca.por = Cancelado por");
+        // printer.newLine();
+        // printer.print("Ca.a = Cancelado a");
+        // printer.newLine();
+        // printer.print("Hora = Hora de cancelacion");
+        // printer.newLine();
+        // printer.drawLine();
+
+        // //--------------------------------------------------------
     
-        printer.newLine();
-        printer.leftRight("TOMATE", "PUNTO DE VENTA");
-        printer.leftRight("Punto de venta", "www.tomatepos.com");
+        // printer.newLine();
+        // printer.leftRight("TOMATE", "PUNTO DE VENTA");
+        // printer.leftRight("Punto de venta", "www.tomatepos.com");
 
 
 
