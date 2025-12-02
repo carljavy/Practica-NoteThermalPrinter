@@ -2,11 +2,10 @@
 import { ThermalPrinter, PrinterTypes, CharacterSet, BreakLine } from "node-thermal-printer";
 import { printerServices } from "./entidades/impresora/printerServices.js";
 import { ReportBuilder, ReportsDirector } from "./reportes/tipos/report.js"
+import { currentDate } from "./reportes/libs/currentDateCalculate.js";
 
 
-const fecha = new Date();
-const fechaActual = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`.padStart(5, '0');
-const horaActual = `${fecha.getHours()}:${fecha.getMinutes()}`;
+
 
 const urlpath = ""
 const ONSITE_ORDER = "ON_SITE_ORDER"
@@ -19,12 +18,7 @@ let montoTotalCancelaciones = 0;
 let numeroTotalCancelaciones = 0;
 //const EMPLOYEE_ORDER = "EMPLOYEE_ORDER" (PROXIMAMENTE)
 
-function getHours(isoString){
-    const date = new Date(isoString);
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    return `${hours}:${minutes}`;
-}
+
 
 function tables(orderType, orderType2, cancelaciones, printer) {
     let numCuentas = 0;
@@ -77,11 +71,14 @@ export default async function impresionURL(req, res) {
     try {
         const cuentas = await fetch(urlpath)
         const data = await cuentas.json()
+        const periodDate = data[0].createdAt
+        const formatDate = currentDate(periodDate)
+        const userRequested = "1001 Alejandro A"
 
         if(data.length > 0) {
             console.log("Cuentas extraidas con exito");
 
-            ejecutarImpresion(data.slice(0,10));
+            ejecutarImpresion(data.slice(0,10), formatDate, userRequested);
         } else if ( !data.length ) {
             console.log("No se extrajeron cuentas");
             throw new Error("No se extrajeron cuentas");
@@ -96,7 +93,7 @@ export default async function impresionURL(req, res) {
 }
 
 
-async function ejecutarImpresion(cancelaciones) {  
+async function ejecutarImpresion(cancelaciones, formatDate, userRequested) {  
 
         let service = printerServices();
 
@@ -114,8 +111,12 @@ async function ejecutarImpresion(cancelaciones) {
         const builder =  new ReportBuilder();
         //crear un director 
         const directorBuilder = new ReportsDirector(builder);
+        
+        
 
-        directorBuilder.cancelationsReport(printer, fechaActual);
+        directorBuilder.cancelationsReport(printer, userRequested, formatDate.fechaActual);
+        directorBuilder.executePrint(printer);
+        
 
 
 
@@ -228,9 +229,6 @@ async function ejecutarImpresion(cancelaciones) {
 
 
 
-        printer.cut();
-
-        printer.execute();
-        console.log("Print executed:");
+        
     
 }

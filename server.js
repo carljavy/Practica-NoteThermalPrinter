@@ -1,8 +1,6 @@
 
 //CONTROLADORES
 import express from'express';
-import impresion from'./impresion.js';
-import { consola } from'./consola.js';
 import impresionURL from'./impresionURL.js';
 
 
@@ -16,9 +14,12 @@ app.get('/', (req, res) => {
   res.send('El servidor Express está funcionando');
 });
 
-app.get('/impresion', impresion);
 
-app.get('/consola', consola);
+
+
+
+
+
 
 app.get('/impresionURL', impresionURL);
 

@@ -1,13 +1,18 @@
 
+import { currentDate } from "../libs/currentDateCalculate.js";
+import { printHeaderTemplate } from "../template/headerTemplate.js";
+
 class Report { 
     constructor(){
         this.title = null;
         this.user = null;
         this.date = null;
         this.sellType = null;
+        this.periodDetail = null;
     }
 }   
-
+// _ = protegido
+// __ = privado
 export class ReportBuilder {
     constructor(){
         this.__report = new Report();
@@ -28,12 +33,29 @@ export class ReportBuilder {
         return this
     }
 
+    __setCurrentDate(){
+        this.__report.date = currentDate().fechaYHora
+        return this
+    }
+
     setSellType(sellType){
         this.__report.sellType = sellType
         return this
     }
 
-    
+    setPeriodDetail(periodDetail){
+        this.__report.periodDetail = periodDetail
+        return this;
+    }
+
+    setHeader(printer){
+
+        const report = this.build();
+
+        printHeaderTemplate(printer, report)
+
+    }
+
     build(){
         return this.__report;
     }
@@ -47,38 +69,31 @@ export class ReportBuilder {
 //console.log(builder.build());
 
 
+
 export class ReportsDirector {
     constructor(reportBuilder){
         this.__builder = reportBuilder;
+
     }
 
+    cancelationsReport(printer, userRequested, formatDate){
+        
+        this.__builder.setTittle("Cancelaciones")
+                      .setPeriodDetail(formatDate)
+                      .setUser(userRequested)
+                      .__setCurrentDate()
+
+        this.__builder.setHeader(printer);
+    }
     
+    executePrint(printer){
+        printer.cut();
 
-    cancelationsReport(printer, fechaActual){
-        this.__builder.setTittle("Cortesias").setDate(fechaActual).setUser("Alejandro");
-        const report = this.__builder.build();
-
-        printer.alignCenter();
-        printer.print("TOMATE TAQUERIA SA DE CV");
-        printer.newLine();
-        printer.bold(true);
-        printer.print(report.title);
-        printer.bold(false);
-        printer.newLine();
-        printer.print(`Ventas del dia ${report.date}`);
-        printer.newLine();
-        printer.newLine();
-
-        printer.alignLeft();
-        printer.print(`Usuario: ${report.user}`);
-        printer.newLine();
-        printer.print(``);
-        printer.newLine();
+        printer.execute();
+        console.log("Print executed:");
     }
-
 
 }
-
 
 
 // class Teclado{
