@@ -8,11 +8,7 @@ import { currentDate } from "./reportes/libs/currentDateCalculate.js";
 
 
 const urlpath = ""
-const ONSITE_ORDER = "ON_SITE_ORDER"
-const ON_SITE_ORDER = "onSite"
-const TOGO_ORDER = "TOGO_ORDER"
-const PHONE_ORDER = "PHONE_ORDER"
-const RAPPI_ORDER = "RAPPI_ORDER"
+
 
 let montoTotalCancelaciones = 0;
 let numeroTotalCancelaciones = 0;
@@ -20,50 +16,50 @@ let numeroTotalCancelaciones = 0;
 
 
 
-function tables(orderType, orderType2, cancelaciones, printer) {
-    let numCuentas = 0;
-    let montoTotal =0;
+// function tables(orderType, orderType2, cancelaciones, printer) {
+//     let numCuentas = 0;
+//     let montoTotal =0;
 
-    printer.underline(true);
-    printer.tableCustom([
-        {text:"Cuenta"},
-        {text:"Monto($)", align:"RIGHT"},
-        {text:"Ca.Por", align:"RIGHT"},
-        {text:"Ca.A", align:"RIGHT"},
-        {text:"", align:"RIGHT"},
-        {text:"Hora", align:"RIGHT"},
-    ]);
+//     printer.underline(true);
+//     printer.tableCustom([
+//         {text:"Cuenta"},
+//         {text:"Monto($)", align:"RIGHT"},
+//         {text:"Ca.Por", align:"RIGHT"},
+//         {text:"Ca.A", align:"RIGHT"},
+//         {text:"", align:"RIGHT"},
+//         {text:"Hora", align:"RIGHT"},
+//     ]);
 
-    printer.underline(false);
+//     printer.underline(false);
 
-    //Object.keys(item).map( el => printer.println(el))
+//     //Object.keys(item).map( el => printer.println(el))
 
-    cancelaciones.forEach( cuenta => {
-        if (true) {
-            printer.tableCustom([
-                {text: `${cuenta.accountId.code}`},
-                {text: `${parseFloat(cuenta.accountId.checkTotal).toFixed(2)}`, align:"RIGHT"},
-                {text: `${cuenta.cancellationBy.employeeNumber}`, align:"RIGHT"},
-                {text: `${cuenta.accountId.userCode}`, align:"RIGHT"},
-                {text: `${cuenta.accountId.user.slice(0, 7)}`, align:"RIGHT"},
-                {text: `${getHours(cuenta.accountId.createdAt)}`, align:"RIGHT"},
-            ]);
-            montoTotal += parseFloat(cuenta.accountId.checkTotal);
-            montoTotalCancelaciones += parseFloat(cuenta.accountId.checkTotal);
-            numCuentas += 1;
-            numeroTotalCancelaciones +=1;
-        }
-    });
+//     cancelaciones.forEach( cuenta => {
+//         if (true) {
+//             printer.tableCustom([
+//                 {text: `${cuenta.accountId.code}`},
+//                 {text: `${parseFloat(cuenta.accountId.checkTotal).toFixed(2)}`, align:"RIGHT"},
+//                 {text: `${cuenta.cancellationBy.employeeNumber}`, align:"RIGHT"},
+//                 {text: `${cuenta.accountId.userCode}`, align:"RIGHT"},
+//                 {text: `${cuenta.accountId.user.slice(0, 7)}`, align:"RIGHT"},
+//                 {text: `${getHours(cuenta.accountId.createdAt)}`, align:"RIGHT"},
+//             ]);
+//             montoTotal += parseFloat(cuenta.accountId.checkTotal);
+//             montoTotalCancelaciones += parseFloat(cuenta.accountId.checkTotal);
+//             numCuentas += 1;
+//             numeroTotalCancelaciones +=1;
+//         }
+//     });
 
-    printer.newLine();
-    printer.alignRight();
-    printer.bold(true);
+//     printer.newLine();
+//     printer.alignRight();
+//     printer.bold(true);
 
-    printer.print(`${numCuentas} Cancelaciones $${montoTotal}`);
+//     printer.print(`${numCuentas} Cancelaciones $${montoTotal}`);
 
-    printer.bold(false);
-    printer.newLine();
-}
+//     printer.bold(false);
+//     printer.newLine();
+// }
 
 export default async function impresionURL(req, res) { 
     console.log("extrayendo primeras 10 cuentas");
@@ -114,8 +110,7 @@ async function ejecutarImpresion(cancelaciones, formatDate, userRequested) {
         
         
 
-        directorBuilder.cancelationsReport(printer, userRequested, formatDate.fechaActual);
-        directorBuilder.executePrint(printer);
+        directorBuilder.cancelationsReport(printer, userRequested, formatDate.datetwo, cancelaciones)
         
 
 

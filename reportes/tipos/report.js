@@ -1,6 +1,7 @@
 
 import { currentDate } from "../libs/currentDateCalculate.js";
 import { printHeaderTemplate } from "../template/headerTemplate.js";
+import { printOrdersTemplate } from "../template/orderTemplate.js";
 
 class Report { 
     constructor(){
@@ -48,12 +49,18 @@ export class ReportBuilder {
         return this;
     }
 
-    setHeader(printer){
+    printHeader(printer){
 
         const report = this.build();
 
         printHeaderTemplate(printer, report)
 
+    }
+
+    printCancelOrders(printer, orders){
+
+
+        printOrdersTemplate(printer, orders)
     }
 
     build(){
@@ -76,15 +83,22 @@ export class ReportsDirector {
 
     }
 
-    cancelationsReport(printer, userRequested, formatDate){
+    cancelationsReport(printer, userRequested, formatDate, orders){
         
         this.__builder.setTittle("Cancelaciones")
                       .setPeriodDetail(formatDate)
                       .setUser(userRequested)
                       .__setCurrentDate()
 
-        this.__builder.setHeader(printer);
+
+
+        this.__builder.printHeader(printer);
+
+        this.__builder.printCancelOrders(printer, orders)
+        
+        this.executePrint(printer)
     }
+
     
     executePrint(printer){
         printer.cut();

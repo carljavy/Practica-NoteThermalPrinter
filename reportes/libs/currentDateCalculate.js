@@ -12,12 +12,18 @@ export function currentDate(periodDate){
     const horaActual = `${fecha.getHours()}:${fecha.getMinutes()}`; 
     const fechaYHora = `${fechaActual} ${horaActual}`
 
-    // const datetwo = new Date(periodDate).toLocaleDateString('es-MX', {
-    //     weekday: 'long',
-    //     year: 'numeric',
-    //     month: 'long',
-    //     day: 'numeric'
-    // });
+    // formato de fecha en numerico ( 12/05/2025)
+    const datetwo = new Date(periodDate).toLocaleDateString('es-MX', {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric'
+    });
 
-    return { fechaActual, horaActual, fechaYHora}
+    const hora = new Date(periodDate).toLocaleTimeString('es-MX', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+    });
+
+    return { datetwo, fechaActual, horaActual, fechaYHora, hora}
 } 
