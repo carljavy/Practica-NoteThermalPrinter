@@ -14,13 +14,7 @@ app.get('/', (req, res) => {
   res.send('El servidor Express está funcionando');
 });
 
-
-
-
-
-
-
-
+// Ruta para impresión desde URL
 app.get('/impresionURL', impresionURL);
 
 

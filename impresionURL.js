@@ -10,11 +10,7 @@ import { currentDate } from "./reportes/libs/currentDateCalculate.js";
 const urlpath = ""
 
 
-let montoTotalCancelaciones = 0;
-let numeroTotalCancelaciones = 0;
 //const EMPLOYEE_ORDER = "EMPLOYEE_ORDER" (PROXIMAMENTE)
-
-
 
 // function tables(orderType, orderType2, cancelaciones, printer) {
 //     let numCuentas = 0;
@@ -61,12 +57,15 @@ let numeroTotalCancelaciones = 0;
 //     printer.newLine();
 // }
 
+//servicio
 export default async function impresionURL(req, res) { 
     console.log("extrayendo primeras 10 cuentas");
 
     try {
         const cuentas = await fetch(urlpath)
+        //serializasion de datos
         const data = await cuentas.json()
+
         const periodDate = data[0].createdAt
         const formatDate = currentDate(periodDate)
         const userRequested = "1001 Alejandro A"
@@ -110,7 +109,7 @@ async function ejecutarImpresion(cancelaciones, formatDate, userRequested) {
         
         
 
-        directorBuilder.cancelationsReport(printer, userRequested, formatDate.datetwo, cancelaciones)
+        directorBuilder.cancelationsReport(printer, userRequested, formatDate.datetwo, cancelaciones);
         
 
 

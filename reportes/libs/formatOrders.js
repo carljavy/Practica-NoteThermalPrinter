@@ -1,11 +1,8 @@
-import { currentDate } from "../libs/currentDateCalculate.js";
+import { currentDate } from "./currentDateCalculate.js";
 
 export function tables(typeOrder, cancelaciones, printer) {
     let numCuentas = 0;
     let montoTotal = 0;
-    let montoTotalCancelaciones = 0;
-    let numeroTotalCancelaciones = 0;
-    
 
     console.log("ESTOY ENTRANDO A LA FUNCION")
 
@@ -41,9 +38,7 @@ export function tables(typeOrder, cancelaciones, printer) {
             ]);
             console.log("sali de la tabla")
             montoTotal += parseFloat(cancelacion.accountId.checkTotal);
-            montoTotalCancelaciones += parseFloat(cancelacion.accountId.checkTotal);
             numCuentas++;
-            numeroTotalCancelaciones++;
         }
     });
 
@@ -55,4 +50,6 @@ export function tables(typeOrder, cancelaciones, printer) {
 
     printer.bold(false);
     printer.newLine();
+    printer.newLine();
+
 }

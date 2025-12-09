@@ -2,6 +2,8 @@
 import { currentDate } from "../libs/currentDateCalculate.js";
 import { printHeaderTemplate } from "../template/headerTemplate.js";
 import { printOrdersTemplate } from "../template/orderTemplate.js";
+import { printFooterTemplate } from "../template/footerTemplate.js";
+import { totalAmountCancelations } from "../template/totalCancelations.js";
 
 class Report { 
     constructor(){
@@ -10,6 +12,8 @@ class Report {
         this.date = null;
         this.sellType = null;
         this.periodDetail = null;
+        this.totalOrders = null;
+        this.totalOrdersAmount = null;
     }
 }   
 // _ = protegido
@@ -49,6 +53,17 @@ export class ReportBuilder {
         return this;
     }
 
+    setTotalOrders(totalOrders){
+        this.__report.totalOrders = totalOrders
+        return this;
+    }
+
+    setTotalOrdersAmount(totalAmountCancelations){
+        this.__report.totalAmountCancelations = totalAmountCancelations
+        return this;
+    }
+
+
     printHeader(printer){
 
         const report = this.build();
@@ -59,8 +74,38 @@ export class ReportBuilder {
 
     printCancelOrders(printer, orders){
 
-
         printOrdersTemplate(printer, orders)
+    }
+
+    printerTotalOrders(printer, orders){
+        let total = 0;
+        let monto = 0;
+        let i = 0;
+        
+        for(i; i < orders.length; i++){
+            total++;
+            monto += parseFloat(orders[i].accountId.checkTotal);
+        }
+        for(let y = 0; y < orders.length; y++){
+            total++;
+            monto += parseFloat(orders[y].accountId.checkTotal);
+        }
+        for(let j = 0; j < orders.length; j++){
+            total++;
+            monto += parseFloat(orders[j].accountId.checkTotal);
+        }
+        for(let k = 0; k < orders.length; k++){
+            total++;
+            monto += parseFloat(orders[k].accountId.checkTotal);
+        }
+
+        totalAmountCancelations(printer, total, monto)
+
+    }
+
+    async printFooter(printer){
+
+        await printFooterTemplate(printer)
     }
 
     build(){
@@ -83,7 +128,7 @@ export class ReportsDirector {
 
     }
 
-    cancelationsReport(printer, userRequested, formatDate, orders){
+    async cancelationsReport(printer, userRequested, formatDate, orders){
         
         this.__builder.setTittle("Cancelaciones")
                       .setPeriodDetail(formatDate)
@@ -92,9 +137,13 @@ export class ReportsDirector {
 
 
 
-        this.__builder.printHeader(printer);
+        this.__builder.printHeader(printer)
 
         this.__builder.printCancelOrders(printer, orders)
+
+        this.__builder.printerTotalOrders(printer, orders)
+
+        await this.__builder.printFooter(printer)
         
         this.executePrint(printer)
     }

@@ -1,4 +1,4 @@
-import { tables } from "../libs/formatOrders";
+import { tables } from "../libs/formatOrders.js";
 
 export function printOrdersTemplate(printer, orders){
 
@@ -17,6 +17,7 @@ const typeOrder = ["Restaurante", "ON_SITE_ORDER",
     for(i; i<= 7; i++){
         //tipo de venta (Restaurante, Para llevar)
         //--------------------------------------------------------
+        printer.newLine();
         printer.drawLine();
         //-------------------------------------------------------
         printer.newLine();
